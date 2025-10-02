@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصميم وتطوير المواقع الإلكترونية - Marketly</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Google Fonts - Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- AOS Library for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #ff006e;
+            --dark-color: #14213d;
+            --light-color: #f8f9fa;
+            --success-color: #2ec4b6;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            padding-top: 80px;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary-color) !important;
+            font-size: 1.8rem;
+        }
+
+        .navbar-brand span {
+            color: var(--secondary-color);
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--dark-color) !important;
+            margin: 0 8px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        /* إصلاح مشكلة القائمة المنسدلة */
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            z-index: 1030;
+            display: none;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 5px 0;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(58, 134, 255, 0.1);
+            color: var(--primary-color);
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+            border-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Hero Section for Service Page */
+        .service-hero {
+            background: linear-gradient(rgba(20, 33, 61, 0.9), rgba(20, 33, 61, 0.9)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.2) 0%, rgba(255, 0, 110, 0.2) 100%);
+            z-index: 0;
+        }
+
+        .service-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-title {
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 25px;
+            font-size: 3rem;
+        }
+
+        .service-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Section Styles */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .content-icon {
+            width: 70px;
+            height: 70px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        /* Benefits Cards */
+        .benefit-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(58, 134, 255, 0.1);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            border-color: rgba(58, 134, 255, 0.3);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* Process Steps */
+        .process-step {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-left: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 60px;
+            right: 30px;
+            width: 2px;
+            height: calc(100% - 60px);
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Service Features */
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(58, 134, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            border-color: rgba(58, 134, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* Website Types */
+        .website-type-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .website-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+
+        .website-type-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-color: rgba(58, 134, 255, 0.2);
+        }
+
+        .website-type-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Technology Stack */
+        .tech-stack-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .tech-stack-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark-color), #2b5876);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a2a6c, #2b5876);
+            padding: 60px 0 30px;
+            color: white;
+        }
+
+        footer h5 {
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+        }
+
+        footer ul li {
+            margin-bottom: 12px;
+        }
+
+        footer a {
+            color: #d1e0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: white;
+            padding-right: 5px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-3px);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--dark-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            bottom: 30px;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .navbar-nav {
+                padding: 20px 0;
+            }
+
+            .nav-link {
+                margin: 5px 0;
+                text-align: right;
+            }
+
+            .service-hero {
+                padding: 100px 0 60px;
+            }
+
+            .service-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 60px 0;
+            }
+
+            .service-hero {
+                padding: 80px 0 50px;
+            }
+
+            .service-title {
+                font-size: 2.2rem;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            .process-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin-left: 0;
+                margin-bottom: 15px;
+            }
+
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        .custom-nav-image {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-nav-image img {
+            height: 50px;
+            /* ابدأ بهذا الحجم وشوف */
+            width: auto;
+            max-height: 60px;
+            /* حد أقصى عشان ما يكبرش أوي */
+        }
+
+        .nav-logo {
+            height: 50px;
+            width: auto;
+            max-height: 60px;
+            transition: all 0.3s ease;
+            /* حركة سلسة */
+            cursor: pointer;
+        }
+
+        /* Hover effect */
+        .nav-logo:hover {
+            transform: scale(2);
+            /* تكبير بسيط */
+            filter: brightness(1.1);
+            /* تفتيح بسيط */
+        }
+
+        /* لما تكون الصورة مضغوطة (active) */
+        .nav-logo:active {
+            transform: scale(1.3);
+            /* تكبير أكبر عند الضغط */
+            transition: transform 0.2s ease;
+            /* حركة سريعة للضغط */
+        }
+
+        /* تأثير لما نضغط ونمسك */
+        .nav-logo:focus {
+            outline: none;
+            transform: scale(1.25);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Mark<span>etly</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">الرئيسية</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            الخدمات
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="social.html"><i class="bi bi-megaphone me-2"></i>إدارة
+                                    وسائل
+                                    التواصل الاجتماعي</a></li>
+                            <li><a class="dropdown-item" href="seo.html"><i class="bi bi-search me-2"></i>تحسين
+                                    محركات البحث
+                                    (SEO)</a></li>
+                            <li><a class="dropdown-item" href="content.html"><i
+                                        class="bi bi-pencil-square me-2"></i>إدارة
+                                    المحتوى</a></li>
+                            <li><a class="dropdown-item" href="email.html"><i class="bi bi-envelope me-2"></i>التسويق
+                                    عبر البريد
+                                    الإلكتروني</a></li>
+                            <li><a class="dropdown-item" href="googleAds.html"><i
+                                        class="bi bi-currency-dollar me-2"></i>الإعلانات
+                                    المدفوعة</a></li>
+                            <li><a class="dropdown-item" href="websites.html"><i class="bi bi-laptop me-2"></i>تصميم
+                                    وتطوير المواقع</a></li>
+                            <li><a class="dropdown-item" href="videos.html"><i
+                                        class="bi bi-camera-video me-2"></i>التصوير وإنتاج الفيديو</a></li>
+                            <li><a class="dropdown-item active" href="Marketing.html"><i
+                                        class="bi bi-graph-up me-2"></i>الاستشارات التسويقية</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.html">اراء العملاء</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">تواصل معنا</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="custom-nav-image">
+                <img src="img/Marketly (1).png" alt="Logo" class="nav-logo">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="service-hero">
+        <div class="container service-hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <span class="service-badge"><i class="bi bi-laptop me-2"></i>تصميم مواقع احترافية</span>
+                    <h1 class="service-title fw-bold mb-4">موقعك الإلكتروني هو <span class="text-gradient">واجهة عملك
+                            الرقمية!</span></h1>
+                    <p class="lead mb-5">في Marketly، نحول أفكارك إلى واقع رقمي مذهل. نصنع مواقع إلكترونية لا تلفت
+                        الأنظار فحسب، بل تحقق أهدافك التجارية وتقدم تجربة مستخدم استثنائية تترك انطباعًا لا ينسى.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#contact" class="btn btn-primary btn-lg"><i class="bi bi-code-slash me-2"></i>اطلب
+                            موقعك الآن</a>
+                        <a href="#services" class="btn btn-outline-light btn-lg"><i
+                                class="bi bi-play-circle me-2"></i>شاهد أعمالنا</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block">
+                    <div class="text-center">
+                        <div style="font-size: 180px; color: rgba(255,255,255,0.2);">
+                            <i class="bi bi-globe"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web Development Benefits Section -->
+    <section class="section-padding" id="benefits">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">لماذا <span class="text-gradient">موقع إلكتروني احترافي</span>؟</h2>
+                <p class="text-muted lead">موقعك الإلكتروني هو أساس وجودك الرقمي وأقوى أداة تسويقية تملكها</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="bi bi-shop"></i>
+                        </div>
+                        <h4>متجرك المفتوح 24/7</h4>
+                        <p class="text-muted">يعمل موقعك على مدار الساعة، يستقبل العملاء، ويحقق المبيعات حتى أثناء نومك
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="bi bi-award"></i>
+                        </div>
+                        <h4>مصداقية واحترافية</h4>
+                        <p class="text-muted">موقع احترافي يزيد من ثقة العملاء ويضعك في مصاف الشركات الرائدة في مجالك
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h4>نمو مستمر</h4>
+                        <p class="text-muted">أداة تسويقية فعالة تدر إيرادات مستمرة وتنمو مع نمو عملك</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6" data-aos="fade-up">
+                    <div class="stat-item">
+                        <div class="stat-number">75%</div>
+                        <div class="stat-label">من العملاء يحكمون على مصداقية الشركة من موقعها</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-item">
+                        <div class="stat-number">88%</div>
+                        <div class="stat-label">من المستهلكين لا يعودون لموقع بتجربة استخدام سيئة</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-item">
+                        <div class="stat-number">50%</div>
+                        <div class="stat-label">زيادة في التحويلات مع موقع محسن للهواتف</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-item">
+                        <div class="stat-number">3x</div>
+                        <div class="stat-label">زيادة في فرص الحصول على عملاء جدد</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach Section -->
+    <section class="section-padding bg-light" id="services">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">كيف نعمل في <span class="text-gradient">Marketly</span>؟</h2>
+                <p class="text-muted lead">عملية تطوير شاملة تضمن حصولك على موقع إلكتروني استثنائي يحقق أهدافك</p>
+            </div>
+
+            <div class="content-section" data-aos="fade-up">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h3 class="mb-4">فهم عميق وتحليل استراتيجي</h3>
+                        <p>نبدأ بفهم عميق لعملك، جمهورك المستهدف، وأهدافك التجارية. نجري بحثًا شاملاً لتحليل المنافسين
+                            وفهم احتياجات السوق، ثم نطور استراتيجية رقمية مخصصة تحول أهدافك إلى واقع ملموس.</p>
+                        <div class="row mt-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                                    <span>تحليل المنافسين الشامل</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                                    <span>دراسة الجمهور المستهدف</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                                    <span>تخطيط هيكل الموقع</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                                    <span>تحديد أهداف قابلة للقياس</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <div class="content-icon">
+                            <i class="bi bi-clipboard-data"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-steps mt-5">
+                <div class="process-step" data-aos="fade-right">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>التصميم والإبداع البصري</h4>
+                        <p>فريقنا من المصممين المبدعين يصمم واجهات مستخدم جذابة وتجارب مستخدم استثنائية. نركز على
+                            التصميم الذي لا يلفت الانتباه فحسب، بل يوجه الزوار نحو اتخاذ الإجراءات المطلوبة بشكل طبيعي
+                            وسلس.</p>
+                        <p>نصمم واجهات متجاوبة تعمل بشكل مثالي على جميع الأجهزة، من أجهزة الكمبيوتر إلى الهواتف الذكية،
+                            مع الحفاظ على هوية علامتك التجارية وتجسيد شخصيتها بشكل مرئي.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="100">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>التطوير والتقنية المتقدمة</h4>
+                        <p>فريقنا من المطورين المحترفين يحول التصاميم إلى مواقع إلكترونية فعالة وسريعة وآمنة. نستخدم
+                            أحدث التقنيات وأفضل الممارسات في مجال تطوير الويب لضمان حصولك على موقع عالي الجودة.</p>
+                        <p>نراعي في تطويرنا سرعة التحميل، الأمان، وسهولة الإدارة، مع توفير نظام إدارة محتوى سهل
+                            الاستخدام يمكنك من التحكم الكامل في موقعك.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="200">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>الاختبار والتسليم</h4>
+                        <p>نختبر موقعك بدقة على جميع المتصفحات والأجهزة للتأكد من عمله بشكل مثالي في جميع الظروف. نتحقق
+                            من سرعة التحميل، الأمان، وسهولة الاستخدام قبل تسليمه لك.</p>
+                        <p>نسلم لك موقعًا كاملًا جاهزًا للعمل، مع تدريب كامل على إدارته وصيانته، وضمان دعم فني مستمر
+                            لضمان استمرارية عمله بشكل مثالي.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Website Types Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">أنواع <span class="text-gradient">المواقع</span> التي نطورها</h2>
+                <p class="text-muted lead">حلول ويب متكاملة تناسب جميع احتياجاتك التجارية</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="website-type-card">
+                        <div class="website-type-icon">
+                            <i class="bi bi-briefcase"></i>
+                        </div>
+                        <h4 class="mb-3">المواقع الشركات</h4>
+                        <p class="text-muted">مواقع احترافية تعرض خدمات الشركة، فريق العمل، ومشاريعها السابقة بشكل أنيق
+                            ومؤثر</p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary me-2">مصداقية</span>
+                            <span class="badge bg-success">احترافية</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="website-type-card">
+                        <div class="website-type-icon">
+                            <i class="bi bi-cart"></i>
+                        </div>
+                        <h4 class="mb-3">المتاجر الإلكترونية</h4>
+                        <p class="text-muted">منصات بيع كاملة المواصفات تدعم جميع طرق الدفع والشحن وتوفر تجربة شراء سلسة
+                        </p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary me-2">مبيعات</span>
+                            <span class="badge bg-success">تحويل</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="website-type-card">
+                        <div class="website-type-icon">
+                            <i class="bi bi-journal"></i>
+                        </div>
+                        <h4 class="mb-3">مواقع المدونات</h4>
+                        <p class="text-muted">منصات نشر محتوى متطورة تدعم الكتابة، التصوير، والفيديو مع تحسين متقدم
+                            لمحركات البحث</p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary me-2">محتوى</span>
+                            <span class="badge bg-success">تفاعل</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="website-type-card">
+                        <div class="website-type-icon">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <h4 class="mb-3">مواقع الحجوزات</h4>
+                        <p class="text-muted">أنظمة حجوزات متكاملة للفنادق، المطاعم، العيادات، وخدمات المواعيد مع إدارة
+                            زمنية ذكية</p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary me-2">تنظيم</span>
+                            <span class="badge bg-success">كفاءة</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="website-type-card">
+                        <div class="website-type-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h4 class="mb-3">المنتديات والمجتمعات</h4>
+                        <p class="text-muted">منصات تفاعلية لبناء المجتمعات الافتراضية وإدارة النقاشات وتبادل الخبرات
+                        </p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary me-2">تفاعل</span>
+                            <span class="badge bg-success">مجتمع</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="website-type-card">
+                        <div class="website-type-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <h4 class="mb-3">التطبيقات الويب</h4>
+                        <p class="text-muted">حلول ويب متقدمة تشمل أنظمة إدارة، منصات تعلم إلكتروني، وتطبيقات أعمال
+                            مخصصة</p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary me-2">تخصيص</span>
+                            <span class="badge bg-success">ابتكار</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">تقنيات <span class="text-gradient">متطورة</span> نستخدمها</h2>
+                <p class="text-muted lead">أحدث الأدوات والتقنيات لضمان حصولك على موقع إلكتروني متميز</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tech-stack-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-filetype-html"></i>
+                        </div>
+                        <h5>HTML5 & CSS3</h5>
+                        <p class="text-muted small">أحدث معايير التصميم والتطوير</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tech-stack-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-filetype-js"></i>
+                        </div>
+                        <h5>JavaScript</h5>
+                        <p class="text-muted small">تفاعلية وتجارب مستخدم متقدمة</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="tech-stack-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-bootstrap"></i>
+                        </div>
+                        <h5>Bootstrap 5</h5>
+                        <p class="text-muted small">تصميم متجاوب وعصري</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="tech-stack-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-wordpress"></i>
+                        </div>
+                        <h5>WordPress</h5>
+                        <p class="text-muted small">أنظمة إدارة محتوى متطورة</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="tech-stack-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5>أمن وحماية</h5>
+                        <p class="text-muted small">حماية متقدمة من الاختراقات</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="tech-stack-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-lightning"></i>
+                        </div>
+                        <h5>أداء وسرعة</h5>
+                        <p class="text-muted small">تحميل فائق السرعة</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="700">
+                    <div class="tech-stack-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-search"></i>
+                        </div>
+                        <h5>SEO متقدم</h5>
+                        <p class="text-muted small">تحسين لمحركات البحث</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="800">
+                    <div class="tech-stack-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <h5>تجاوب تام</h5>
+                        <p class="text-muted small">عمل مثالي على جميع الأجهزة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Services Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">خدمات <span class="text-gradient">ويب</span> إضافية</h2>
+                <p class="text-muted lead">نوفر كل ما تحتاجه لنجاح وجودك الرقمي</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-hdd-network"></i>
+                        </div>
+                        <h4>استضافة ويب</h4>
+                        <p class="text-muted">حلول استضافة سريعة وآمنة مع دعم فني متواصل</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4>شهادات SSL</h4>
+                        <p class="text-muted">حماية بيانات زوارك وتعزيز ثقتهم في موقعك</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-tools"></i>
+                        </div>
+                        <h4>صيانة مستمرة</h4>
+                        <p class="text-muted">خدمات صيانة وتحديث دورية لموقعك</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h4>تحليلات الموقع</h4>
+                        <p class="text-muted">تتبع وتحليل أداء موقعك وزوارك</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </div>
+                        <h4>نسخ احتياطي</h4>
+                        <p class="text-muted">نسخ احتياطي تلقائي يومي لبيانات موقعك</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h4>دعم فني</h4>
+                        <p class="text-muted">دعم فني متواصل لحل أي مشكلة تواجهك</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-3">هل أنت مستعد لبدء مشروع موقعك الإلكتروني؟</h2>
+                    <p class="lead mb-0">فريقنا من خبراء تصميم وتطوير المواقع جاهز لتحويل فكرتك إلى موقع إلكتروني
+                        استثنائي يحقق أهدافك ويلهم زوارك</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="contact.html" class="btn btn-light btn-lg px-5 py-3 fw-bold">ابدأ مشروعك الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4 class="text-white mb-4">Mark<span class="text-gradient">etly</span></h4>
+                    <p class="text-muted">وكالة تسويق رقمي متكاملة تقدم حلولاً مبتكرة لتعزيز وجودك الرقمي وزيادة نمو
+                        أعمالك.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-muted text-decoration-none">الرئيسية</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-muted text-decoration-none">عن الشركة</a></li>
+                        <li class="mb-2"><a href="#services" class="text-muted text-decoration-none">الخدمات</a>
+                        </li>
+                        <li class="mb-2"><a href="blog.html" class="text-muted text-decoration-none">المدونة</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted text-decoration-none">اتصل بنا</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="text-white mb-4">اتصل بنا</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-3"><i class="bi bi-geo-alt me-2"></i> القاهره، جمهورية مصر العربية</li>
+                        <li class="mb-3"><i class="bi bi-telephone me-2"></i> +201009742569</li>
+                        <li class="mb-3"><i class="bi bi-envelope me-2"></i> <a
+                                href="mailto:marketlysmarter@gmail.com">marketlysmarter@gmail.com</a></li>
+                        <li class="mb-3"><i class="bi bi-clock me-2"></i> الأحد - الخميس: 9ص - 5م</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2025 Marketly. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-muted text-decoration-none me-3">سياسة الخصوصية</a>
+                    <a href="#" class="text-muted text-decoration-none">شروط الخدمة</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap & JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Back to top button
+        var backToTopButton = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

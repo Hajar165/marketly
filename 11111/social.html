@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الحملات التسويقية - Marketly</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Google Fonts - Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- AOS Library for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #ff006e;
+            --dark-color: #14213d;
+            --light-color: #f8f9fa;
+            --success-color: #2ec4b6;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            padding-top: 80px;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary-color) !important;
+            font-size: 1.8rem;
+        }
+
+        .navbar-brand span {
+            color: var(--secondary-color);
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--dark-color) !important;
+            margin: 0 8px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        /* إصلاح مشكلة القائمة المنسدلة */
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            z-index: 1030;
+            display: none;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 5px 0;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(58, 134, 255, 0.1);
+            color: var(--primary-color);
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+            border-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Hero Section for Service Page */
+        .service-hero {
+            background: linear-gradient(rgba(20, 33, 61, 0.9), rgba(20, 33, 61, 0.9)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.2) 0%, rgba(255, 0, 110, 0.2) 100%);
+            z-index: 0;
+        }
+
+        .service-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-title {
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 25px;
+            font-size: 3rem;
+        }
+
+        .service-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Section Styles */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .content-icon {
+            width: 70px;
+            height: 70px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        /* Platform Cards */
+        .platform-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(58, 134, 255, 0.1);
+        }
+
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            border-color: rgba(58, 134, 255, 0.3);
+        }
+
+        .platform-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* Process Steps */
+        .process-step {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-left: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 60px;
+            right: 30px;
+            width: 2px;
+            height: calc(100% - 60px);
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Service Features */
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(58, 134, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            border-color: rgba(58, 134, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a2a6c, #2b5876);
+            padding: 60px 0 30px;
+            color: white;
+        }
+
+        footer h5 {
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+        }
+
+        footer ul li {
+            margin-bottom: 12px;
+        }
+
+        footer a {
+            color: #d1e0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: white;
+            padding-right: 5px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-3px);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--dark-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            bottom: 30px;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .navbar-nav {
+                padding: 20px 0;
+            }
+
+            .nav-link {
+                margin: 5px 0;
+                text-align: right;
+            }
+
+            .service-hero {
+                padding: 100px 0 60px;
+            }
+
+            .service-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 60px 0;
+            }
+
+            .service-hero {
+                padding: 80px 0 50px;
+            }
+
+            .service-title {
+                font-size: 2.2rem;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            .process-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin-left: 0;
+                margin-bottom: 15px;
+            }
+
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        .custom-nav-image {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-nav-image img {
+            height: 50px;
+            /* ابدأ بهذا الحجم وشوف */
+            width: auto;
+            max-height: 60px;
+            /* حد أقصى عشان ما يكبرش أوي */
+        }
+
+        .nav-logo {
+            height: 50px;
+            width: auto;
+            max-height: 60px;
+            transition: all 0.3s ease;
+            /* حركة سلسة */
+            cursor: pointer;
+        }
+
+        /* Hover effect */
+        .nav-logo:hover {
+            transform: scale(2);
+            /* تكبير بسيط */
+            filter: brightness(1.1);
+            /* تفتيح بسيط */
+        }
+
+        /* لما تكون الصورة مضغوطة (active) */
+        .nav-logo:active {
+            transform: scale(1.3);
+            /* تكبير أكبر عند الضغط */
+            transition: transform 0.2s ease;
+            /* حركة سريعة للضغط */
+        }
+
+        /* تأثير لما نضغط ونمسك */
+        .nav-logo:focus {
+            outline: none;
+            transform: scale(1.25);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Mark<span>etly</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">الرئيسية</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="servicesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            الخدمات
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="social.html"><i class="bi bi-megaphone me-2"></i>إدارة
+                                    وسائل
+                                    التواصل الاجتماعي</a></li>
+                            <li><a class="dropdown-item" href="seo.html"><i class="bi bi-search me-2"></i>تحسين
+                                    محركات البحث
+                                    (SEO)</a></li>
+                            <li><a class="dropdown-item" href="content.html"><i
+                                        class="bi bi-pencil-square me-2"></i>إدارة
+                                    المحتوى</a></li>
+                            <li><a class="dropdown-item" href="email.html"><i class="bi bi-envelope me-2"></i>التسويق
+                                    عبر البريد
+                                    الإلكتروني</a></li>
+                            <li><a class="dropdown-item" href="googleAds.html"><i
+                                        class="bi bi-currency-dollar me-2"></i>الإعلانات
+                                    المدفوعة</a></li>
+                            <li><a class="dropdown-item" href="websites.html"><i class="bi bi-laptop me-2"></i>تصميم
+                                    وتطوير المواقع</a></li>
+                            <li><a class="dropdown-item" href="videos.html"><i
+                                        class="bi bi-camera-video me-2"></i>التصوير وإنتاج الفيديو</a></li>
+                            <li><a class="dropdown-item active" href="Marketing.html"><i
+                                        class="bi bi-graph-up me-2"></i>الاستشارات التسويقية</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.html">اراء العملاء</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">تواصل معنا</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="custom-nav-image">
+                <img src="img/Marketly (1).png" alt="Logo" class="nav-logo">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="service-hero">
+        <div class="container service-hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <span class="service-badge"><i class="bi bi-megaphone me-2"></i>خدمات متكاملة</span>
+                    <h1 class="service-title fw-bold mb-4">إدارة الحملات <span class="text-gradient">التسويقية</span>
+                    </h1>
+                    <p class="lead mb-5">اكتسبنا ريادتنا من قدرتنا على إدارة الحملات التسويقية عبر مواقع التواصل
+                        الإجتماعي بالخطط المتكاملة القائمة على المعلومات والدراسات، بالإضافة إلى الإطلاع الدائم على كافة
+                        الأدوات والتحديثات التي تطرأ على هذه المنصات.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#services" class="btn btn-outline-light btn-lg"><i
+                                class="bi bi-play-circle me-2"></i>اعرف المزيد</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block">
+                    <div class="text-center">
+                        <div style="font-size: 180px; color: rgba(255,255,255,0.2);">
+                            <i class="bi bi-megaphone"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="section-padding" id="platforms">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">أين يمكنك تسويق عملك على <span class="text-gradient">وسائل التواصل
+                        الإجتماعي</span>؟</h2>
+                <p class="text-muted lead">بفضل خدمات التواصل الاجتماعي، يمكن لشركتك إطلاق حملة على المنصات الأساسية
+                    التالية</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="bi bi-facebook"></i>
+                        </div>
+                        <h4>Facebook</h4>
+                        <p class="text-muted">المنصة الأكثر انتشارًا للتواصل مع جمهور متنوع</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="bi bi-twitter"></i>
+                        </div>
+                        <h4>Twitter</h4>
+                        <p class="text-muted">مثالية للمحادثات الفورية والأخبار العاجلة</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="bi bi-instagram"></i>
+                        </div>
+                        <h4>Instagram</h4>
+                        <p class="text-muted">منصة بصرية مثالية للعلامات التجارية الإبداعية</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="bi bi-linkedin"></i>
+                        </div>
+                        <h4>LinkedIn</h4>
+                        <p class="text-muted">الشبكة المثالية للتواصل المهني و B2B</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="bi bi-tiktok"></i>
+                        </div>
+                        <h4>TikTok</h4>
+                        <p class="text-muted">منصة الفيديو القصير للوصول إلى الجماهير الشابة</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="bi bi-snapchat"></i>
+                        </div>
+                        <h4>Snapchat</h4>
+                        <p class="text-muted">مثالية للحملات التفاعلية والمحتوى المؤقت</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <p class="lead">يقوم أخصائيو وسائل التواصل الاجتماعي ذوو الخبرة لدى <strong>Marketly</strong> بالبحث
+                    في مجال عملك وجمهورك وأهدافك لتحديد أفضل المنصات الالكترونية لإنطلاق نشاطك.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section-padding bg-light" id="services">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">كيف تعمل خدمات إدارة وسائل التواصل <span class="text-gradient">الإجتماعي
+                        لدينا</span>؟</h2>
+                <p class="text-muted lead">إذا كنت تتساءل عما يشبهه العمل مع وكالة تسويق الكتروني مثل Marketly فإن
+                    هذا القسم يقدم نظرة سريعة على تجاربنا مع عملائنا</p>
+            </div>
+
+            <div class="content-section" data-aos="fade-up">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h3 class="mb-4">ما نفعله في Marketly لإنجاح حملاتك على مواقع التواصل الإجتماعي</h3>
+                        <div class="row mt-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                                    <span>توفير مدير حساب مواقع تواصل إجتماعي ماهر</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                                    <span>تحليل متعمق تواجدك على مواقع التواصل الاجتماعي</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                                    <span>استراتيجية مستندة إلى البيانات</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                                    <span>نتائج حقيقية وملموسة</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <div class="content-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-steps mt-5">
+                <div class="process-step" data-aos="fade-right">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>تعرّف على مدير حسابات مواقع التواصل الاجتماعي</h4>
+                        <p>عندما تقرر الاستثمار عبر شبكات التواصل الاجتماعي بمساعدة <strong>Marketly</strong> سيصحبك
+                            مدير حساب متخصص
+                            في مواقع التواصل الإجتماعي يشرف على كل جانب من جوانب حملتك الإعلانية ويديرها. بدءًا من محتوى
+                            المنشورات وتصميم الصور حتي متابعة النتائج.</p>
+                        <p>لدينا في <strong>Marketly</strong> مديري حسابات لديهم الخبرة اللازمة لتنفيذ الإستراتيجية
+                            الموضوعة لك،
+                            بالإضافة إلى قيامهم بأبحاث سمعة العلامة التجارية الخاصة بك وبمنافسيك.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="100">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>احصل على تحليل متعمق لوجودك على مواقع التواصل الاجتماعي</h4>
+                        <p>بمجرد أن يجتمع Account Manager المخصص لك مع فريقك. سواء كان شخصيًا أو عبر مكالمة هاتفية، تجري
+                            كمية هائلة من الأبحاث خلال هذه المرحلة لنشاطك ونشاط منافسيك بما يعرف بـ "SWOT Analysis".</p>
+                        <p>يعمل هذا البحث كمرجع مفيد للـ Marketer ، فهو يزوده بمعلومات قيمة حول ما تحتاج إليه استراتيجية
+                            شركتك لتحقيق النجاح. بالإضافة إلى ذلك، تكشف عن أي عقبات أو فرص.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="200">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>احصل على استراتيجية قائمة على البيانات والأبحاث</h4>
+                        <p>يبدأ Account Manager المخصص في تطوير إستراتيجية التسويق المخصصة لك على مواقع التواصل
+                            الاجتماعي. فهم يستخدمون أبحاثهم. بالإضافة إلى التعليقات التقييمية التي يقدمها فريقك، لبناء
+                            استراتيجية قصيرة وطويلة الأمد تتوافق مع أهدافك.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="300">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>شاهد نتائج حقيقية وملموسة</h4>
+                        <p>بمجرد الاتفاق على استراتيجية محددة للحملات. يمكن للـ Marketer البدء في تطوير التسليمات
+                            الشهرية لمنشوراتك و إعلاناتك وإطلاقها على المنصات المحددة للعمل، وذلك بعد الإتفاق مع فريقك.
+                        </p>
+                        <p>بعد إطلاق استراتيجيتك، يقوم Account Manager مراقبة أداء منشوراتك و إعلاناتك وغير ذلك.</p>
+                        <p>في الأشهر الأولى من حملة الـ Social Media، يجب أن يشهد نشاطك التجاري تغييرات ملحوظة في يومك.
+                            قد ترى المزيد من الطلبات ناتجة عن الحملة أو المزيد من التعليقات و الأسئلة الخاصة بنشاطك أو
+                            مزيد من الإنتشار.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Features Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">ما يمكننا في <span class="text-gradient">Marketly</span> إنتاجه لتعزيز
+                    تواجدك على مواقع التواصل الإجتماعي</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h4>تصاميم Social Media مبتكرة</h4>
+                        <p class="text-muted">تصاميم جذابة وعصرية تناسب هوية علامتك التجارية</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-brush"></i>
+                        </div>
+                        <h4>هوية مميزة وفريدة</h4>
+                        <p class="text-muted">هوية بصرية مُمثلة لنشاطك وتعزز التعرف على علامتك</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-camera-video"></i>
+                        </div>
+                        <h4>محتوى مصور "فيديو"</h4>
+                        <p class="text-muted">إنتاج فيديوهات احترافية تجذب انتباه جمهورك</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-chat-square-text"></i>
+                        </div>
+                        <h4>محتوى جذاب</h4>
+                        <p class="text-muted">محتوى يخاطب الجمهور المستهدف ويعزز ظهورك في نتائج البحث</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <h4>إعدادت الحسابات</h4>
+                        <p class="text-muted">إعدادت احترافية لحساباتك على كافة مواقع التواصل الإجتماعي</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h4>تحليل سمعة العلامة التجارية</h4>
+                        <p class="text-muted">مراقبة وتحليل سمعة علامتك التجارية على المنصات المختلفة</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="700">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-megaphone"></i>
+                        </div>
+                        <h4>إدارة الإعلانات</h4>
+                        <p class="text-muted">إدارة الإعلانات في مرحلة ما بعد التمويل</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="800">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-binoculars"></i>
+                        </div>
+                        <h4>تحليل المنافسين</h4>
+                        <p class="text-muted">تحليل متعمق للمنافسين واستراتيجياتهم التسويقية</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="900">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-eye"></i>
+                        </div>
+                        <h4>المراقبة اليومية</h4>
+                        <p class="text-muted">المراقبة اليومية لوسائل التواصل الاجتماعي</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-file-text"></i>
+                        </div>
+                        <h4>تقارير شهرية شفافة</h4>
+                        <p class="text-muted">تقارير مفصلة وشفافة عن أداء حملاتك الشهرية</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="1100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-rocket"></i>
+                        </div>
+                        <h4>الحملات الإعلانية الناجحة</h4>
+                        <p class="text-muted">تصميم وإدارة حملات إعلانية ناجحة تحقق أهدافك</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-3">هل أنت مستعد لتعزيز وجودك الرقمي؟</h2>
+                    <p class="lead mb-0">فريقنا جاهز لدعمك بخطط تسويق رقمية مبتكرة تساعدك على الوصول إلى جمهورك وتحقيق
+                        أهداف أعمالك، تواصل معنا الآن</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="contact.html" class="btn btn-light btn-lg px-5 py-3 fw-bold">تواصل معنا الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4 class="text-white mb-4">Mark <span class="text-gradient">etly</span></h4>
+                    <p class="text-muted">وكالة تسويق رقمي متكاملة تقدم حلولاً مبتكرة لتعزيز وجودك الرقمي وزيادة نمو
+                        أعمالك.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-muted text-decoration-none">الرئيسية</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-muted text-decoration-none">عن الشركة</a></li>
+                        <li class="mb-2"><a href="#services" class="text-muted text-decoration-none">الخدمات</a>
+                        </li>
+                        <li class="mb-2"><a href="blog.html" class="text-muted text-decoration-none">المدونة</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted text-decoration-none">اتصل بنا</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="text-white mb-4">اتصل بنا</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-3"><i class="bi bi-geo-alt me-2"></i> القاهره، جمهورية مصر العربية</li>
+                        <li class="mb-3"><i class="bi bi-telephone me-2"></i> +201009742569</li>
+                        <li class="mb-3"><i class="bi bi-envelope me-2"></i> <a
+                                href="mailto:marketlysmarter@gmail.com">marketlysmarter@gmail.com</a></li>
+                        <li class="mb-3"><i class="bi bi-clock me-2"></i> الأحد - الخميس: 9ص - 5م</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2025 Marketly. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-muted text-decoration-none me-3">سياسة الخصوصية</a>
+                    <a href="#" class="text-muted text-decoration-none">شروط الخدمة</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap & JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Back to top button
+        var backToTopButton = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

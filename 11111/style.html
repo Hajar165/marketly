@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketly - الرئيسية</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --primary-dark: #2563eb;
+            --secondary-color: #ff5a5f;
+            --secondary-dark: #e11d48;
+            --dark-color: #1e293b;
+            --light-bg: #f8fafc;
+            --text-color: #334155;
+            --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image:
+                radial-gradient(circle at 5% 10%, rgba(58, 134, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 95% 80%, rgba(255, 90, 95, 0.05) 0%, transparent 20%);
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: relative;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 2.2rem;
+        }
+
+        .logo-text span {
+            color: var(--secondary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .social-links a:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .text-content {
+            padding: 10px;
+        }
+
+        .title {
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            position: relative;
+        }
+
+        .title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 25px;
+        }
+
+        .highlight {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .graphic-content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-graphic {
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow:
+                inset 0 0 0 8px rgba(58, 134, 255, 0.1),
+                inset 0 0 0 16px rgba(255, 90, 95, 0.05);
+        }
+
+        .graphic-icon {
+            font-size: 120px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .element-1 {
+            background: var(--primary-color);
+            top: 20px;
+            left: 20px;
+            animation-delay: 0s;
+        }
+
+        .element-2 {
+            background: var(--secondary-color);
+            bottom: 30px;
+            right: 10px;
+            animation-delay: 1s;
+        }
+
+        .element-3 {
+            background: #10b981;
+            top: 50%;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature i {
+            font-size: 28px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .feature h4 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .feature p {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-card {
+                padding: 30px 20px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="hero-card">
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">Marketly</div>
+                    <div class="logo-text">mark<span>etly</span></div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+            <div class="hero-content">
+                <div class="text-content">
+                    <h1 class="title">نحو آفاق <span>رقمية</span> جديدة</h1>
+                    <p class="description">
+                        <span class="highlight">Marketly</span> هي شريكك الإستراتيجي في رحلة التحول الرقمي وتحقيق
+                        النجاح عبر الإنترنت. نقدم حلولاً متكاملة وشاملة مصممة خصيصًا لتلبية احتياجات عملك وتوسيع نطاق
+                        وصولك إلى الجمهور المستهدف.
+                    </p>
+                    <p class="description">
+                        بفضل فريقنا من الخبراء المختصين في مجال التسويق الرقمي وتطوير الويب، نساعدك على بناء وجود قوي
+                        وفعال على الإنترنت، وزيادة ظهور علامتك التجارية، وتحقيق النمو المستدام لعملك.
+                    </p>
+                </div>
+
+                <div class="graphic-content">
+                    <div class="main-graphic">
+                        <i class="graphic-icon fas fa-globe-americas"></i>
+                    </div>
+                    <div class="floating-element element-1">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="floating-element element-2">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="floating-element element-3">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>إبداع مميز</h4>
+                    <p>حلول إبداعية تلهم جمهورك وتحقق أهدافك</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-cogs"></i>
+                    <h4>تقنية متطورة</h4>
+                    <p>أحدث الأدوات والتقنيات لتحقيق التميز الرقمي</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-medal"></i>
+                    <h4>جودة عالية</h4>
+                    <p>نلتزم بأعلى معايير الجودة في كل مشروع</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // تأثيرات للعناصر العائمة
+        document.addEventListener('DOMContentLoaded', function () {
+            const elements = document.querySelectorAll('.floating-element');
+            elements.forEach(el => {
+                el.style.animationDelay = `${Math.random() * 2}s`;
+            });
+        });
+    </script>
+</body>
+
+</html>
